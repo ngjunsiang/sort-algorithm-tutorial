@@ -1,3 +1,6 @@
+from tests import dummyFunction, testSort
+
+
 def bubbleSort(array):
     '''
     Author: 
@@ -37,3 +40,5 @@ def quickSort(array):
     using quick sort algorithm.
     '''
     pass
+
+testSort(dummyFunction)

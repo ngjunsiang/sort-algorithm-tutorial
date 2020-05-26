@@ -1,5 +1,13 @@
 from random import shuffle
+import copy
 
+
+def dummyFunction(array):
+    '''
+    Returns a sorted array using built-in sorted() function.
+    This is for testing testSort only!!!
+    '''
+    return sorted(array)
 
 def testSort(sortFunction, **kwargs):
     '''
