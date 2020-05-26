@@ -15,6 +15,10 @@ def testSort(sortFunction, **kwargs):
     3. Each element in the input must be in the output.
        There must be no elements in the output that are not in the input.
     '''
+    count = {'passed': 0,
+             'failed': 0,
+             }
+
     def same_length(input_array, output_array):
         return len(input_array) == len(output_array)
     
@@ -41,16 +45,23 @@ def testSort(sortFunction, **kwargs):
         output_array = sortFunction(input_array)
 
         if same_length(input_array, output_array):
-            print(f'size {size}: length check passed')
+            result = 'passed'
         else:
-            pass
+            result = 'failed'
+        count[result] += 1
+        print(f'size {size}: length check {result}')
 
         if correct_order(output_array):
-            print(f'size {size}: order check passed')
+            result = 'passed'
         else:
-            pass
+            result = 'failed'
+        count[result] += 1
+        print(f'size {size}: order check {result}')
 
         if same_identity(input_array, output_array):
-            print(f'size {size}: identity check passed')
+            result = 'passed'
         else:
-            pass
+            result = 'failed'
+        count[result] += 1
+        print(f'size {size}: identity check {result}')
+    print(f'tests passed: {count["passed"]}, failed: {count["failed"]}')
