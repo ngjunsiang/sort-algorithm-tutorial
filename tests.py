@@ -1,3 +1,6 @@
+from random import shuffle
+
+
 def testSort(sortFunction, **kwargs):
     '''
     Author: 
@@ -30,3 +33,24 @@ def testSort(sortFunction, **kwargs):
             return False
         else:
             return True
+
+    # Test with arrays of size 0 to 100
+    for size in range(0, 101):
+        input_array = [i for i in range(size)]
+        shuffle(input_array)
+        output_array = sortFunction(input_array)
+
+        if same_length(input_array, output_array):
+            print(f'size {size}: length check passed')
+        else:
+            pass
+
+        if correct_order(output_array):
+            print(f'size {size}: order check passed')
+        else:
+            pass
+
+        if same_identity(input_array, output_array):
+            print(f'size {size}: identity check passed')
+        else:
+            pass
