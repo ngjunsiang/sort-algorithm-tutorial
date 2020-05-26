@@ -1,4 +1,4 @@
-from tests import dummyFunction, testSort
+from tests import dummyOrderCheck, dummyLengthIdentityCheck, testSort
 
 
 def bubbleSort(array):
@@ -41,4 +41,5 @@ def quickSort(array):
     '''
     pass
 
-testSort(dummyFunction)
+testSort(dummyOrderCheck)
+testSort(dummyLengthIdentityCheck)

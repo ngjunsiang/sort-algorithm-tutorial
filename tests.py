@@ -2,12 +2,16 @@ from random import shuffle
 import copy
 
 
-def dummyFunction(array):
+def dummyOrderCheck(array):
     '''
     Returns a sorted array using built-in sorted() function.
     This is for testing testSort only!!!
     '''
     return sorted(array)
+
+def dummyLengthIdentityCheck(array):
+    '''Returns same length unsorted array.'''
+    return array
 
 def testSort(sortFunction, **kwargs):
     '''
@@ -52,6 +56,7 @@ def testSort(sortFunction, **kwargs):
         shuffle(input_array)
         output_array = sortFunction(input_array)
 
+        print(f'Testing {sortFunction.__name__}:')
         if same_length(input_array, output_array):
             result = 'passed'
         else:
