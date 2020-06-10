@@ -1,7 +1,19 @@
 from tests import testSort
 
 
-def bubbleSort(array):
+class Counter:
+    '''Helper class for counting number of operations'''
+    def __init__(self, algorithm):
+        self.algo = algorithm
+        self.counter = 0
+    
+    def __repr__(self):
+        return f"Counter('{self.algo}')"
+    
+    def increment(self, num=1):
+        self.counter += num
+
+def bubbleSort(array, counter=None):
     '''
     Author: Ng Jun Siang
     Date: 20200610
@@ -18,6 +30,8 @@ def bubbleSort(array):
             if array[i-1] > array[i]:
                 array[i-1], array[i] = array[i], array[i-1]
                 noswaps = False
+            if counter is not None:
+                counter.increment()
         # return array early if no swaps made (i.e. sorted)
         if noswaps:
             return array
@@ -25,7 +39,7 @@ def bubbleSort(array):
     return array
 
 
-def insertionSort(array):
+def insertionSort(array, counter=None):
     '''
     Author: Ng Jun Siang
     Date: 20200610
@@ -37,6 +51,8 @@ def insertionSort(array):
     def first_index(array, el):
         '''Returns the first index of array that is <= el'''
         for i in range(0, len(array)):
+            if counter is not None:
+                counter.increment()
             if el < array[i]:
                 return i
         return None  # if no index found
@@ -52,10 +68,12 @@ def insertionSort(array):
                 array.insert(sorted_index + 1, el)
         else:
             array.insert(insert_index, el)
+        if counter is not None:
+            counter.increment()
     return array
 
 
-def mergeSort(array):
+def mergeSort(array, counter=None):
     '''
     Author: Ng Jun Siang
     Date: 20200610
@@ -69,6 +87,8 @@ def mergeSort(array):
         l_size, r_size = len(left), len(right)
         a = l = r = 0  # array indices
         while l < l_size and r < r_size:
+            if counter is not None:
+                counter.increment()
             if left[l] <= right[r]:
                 array[a] = left[l]
                 a += 1
@@ -89,14 +109,14 @@ def mergeSort(array):
     left = array[:mid]
     right = array[mid:]
 
-    left = mergeSort(left)
-    right = mergeSort(right)
+    left = mergeSort(left, counter)
+    right = mergeSort(right, counter)
 
     sortedarray = merge(left, right)
     return sortedarray
 
 
-def quickSort(array):
+def quickSort(array, counter=None):
     '''
     Author: Ng Jun Siang
     Date: 20200610
@@ -111,6 +131,9 @@ def quickSort(array):
     pivot = array[-1]
     ltearray = [el for el in array[:-1] if el <= pivot]
     gtarray = [el for el in array[:-1] if el > pivot]
-    ltearray = quickSort(ltearray)
-    gtarray = quickSort(gtarray)
+    if counter is not None:
+        counter.increment(len(ltearray))
+        counter.increment(len(gtarray))
+    ltearray = quickSort(ltearray, counter)
+    gtarray = quickSort(gtarray, counter)
     return ltearray + [pivot] + gtarray
