@@ -50,6 +50,8 @@ def bubbleSort(array, counter=None):
             if array[i-1] > array[i]:
                 array[i-1], array[i] = array[i], array[i-1]
                 noswaps = False
+                if counter is not None:
+                    counter.increment()
             if counter is not None:
                 counter.increment()
         # return array early if no swaps made (i.e. sorted)
