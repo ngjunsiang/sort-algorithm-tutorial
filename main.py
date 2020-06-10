@@ -176,8 +176,7 @@ if __name__ == "__main__":
             array = [n for n in range(n)]
             shuffle(array)
             algo(array, ctr)  # pass counter to algorithm
-            ops_count = ctr.count()  # extract ops count
-            csvdata.write([n, ops_count])  # write row to CSV
+            csvdata.write([n, ctr.count()])  # write row to CSV
 
 # When you have 4 CSV files, one for each algorithm,
 # import them into Google Sheets and plot a line graph
