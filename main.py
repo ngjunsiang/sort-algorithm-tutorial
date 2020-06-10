@@ -1,3 +1,4 @@
+from random import shuffle
 from tests import testSort
 
 
@@ -5,13 +6,31 @@ class Counter:
     '''Helper class for counting number of operations'''
     def __init__(self, algorithm):
         self.algo = algorithm
-        self.counter = 0
+        pass
     
     def __repr__(self):
         return f"Counter('{self.algo}')"
     
-    def increment(self, num=1):
-        self.counter += num
+    def increment(self, num):
+        '''Increase counter by num'''
+        pass
+
+    def count(self):
+        '''Get counter value'''
+        pass
+
+class CSV:
+    '''Class for exporting data'''
+    def __init__(self, filename):
+        self.filename = filename
+        pass
+    
+    def __repr__(self):
+        return f"CSV('{self.filename}')"
+
+    def write(self, row, mode='a'):
+        '''Write a row to CSV file'''
+        pass
 
 def bubbleSort(array, counter=None):
     '''
@@ -137,3 +156,26 @@ def quickSort(array, counter=None):
     ltearray = quickSort(ltearray, counter)
     gtarray = quickSort(gtarray, counter)
     return ltearray + [pivot] + gtarray
+
+
+if __name__ == "__main__":
+    for algo in (bubbleSort,     # each iteration will
+                 insertionSort,  # assign an algorithm
+                 mergeSort,      # to count ops for
+                 quickSort,
+                 ):
+        algorithm = algo.__name__
+        csvdata = CSV(f'{algorithm}.csv')
+        # Count ops for n in multiples of 100,
+        # up to 4000
+        for n in range(0, 100, 4100):
+            ctr = Counter(algorithm)  # initialise a counter
+            array = [n for n in range(n)]
+            shuffle(array)
+            algo(array, ctr)  # pass counter to algorithm
+            ops_count = ctr.count()  # extract ops count
+            csvdata.write([n, ops_count])  # write row to CSV
+
+# When you have 4 CSV files, one for each algorithm,
+# import them into Google Sheets and plot a line graph
+# of all 4
