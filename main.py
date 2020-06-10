@@ -43,6 +43,7 @@ def bubbleSort(array, counter=None):
     if len(array) == 0:
         return array
     sorted_index = len(array) - 1
+    noswaps = False
     while not noswaps and sorted_index > 0:
         noswaps = True
         for i in range(1, sorted_index + 1):
