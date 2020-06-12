@@ -67,3 +67,5 @@ def testSort(sortFunction, **kwargs):
         count[result] += 1
         print(f'size {size}: identity check {result}')
     print(f'tests passed: {count["passed"]}, failed: {count["failed"]}')
+
+print(f'__name__ from tests.py: {globals()["__name__"]}')

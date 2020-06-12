@@ -1,5 +1,5 @@
 from random import shuffle
-from tests import testSort
+# from tests import testSort
 
 
 class Counter:
@@ -11,7 +11,7 @@ class Counter:
     def __repr__(self):
         return f"Counter('{self.algo}')"
     
-    def increment(self, num):
+    def increment(self, num=1):
         '''Increase counter by num'''
         pass
 
@@ -160,7 +160,7 @@ def quickSort(array, counter=None):
     gtarray = quickSort(gtarray, counter)
     return ltearray + [pivot] + gtarray
 
-
+print(f'__name__ from main.py: {globals()["__name__"]}')
 if __name__ == "__main__":
     for algo in (bubbleSort,     # each iteration will
                  insertionSort,  # assign an algorithm
@@ -171,11 +171,12 @@ if __name__ == "__main__":
         csvdata = CSV(f'{algorithm}.csv')
         # Count ops for n in multiples of 100,
         # up to 4000
-        for n in range(0, 100, 4100):
+        for n in range(0, 4100, 100):
             ctr = Counter(algorithm)  # initialise a counter
             array = [n for n in range(n)]
             shuffle(array)
             algo(array, ctr)  # pass counter to algorithm
+            print(f'Writing row for {algo} (n = {n} ...)')
             csvdata.write([n, ctr.count()])  # write row to CSV
 
 # When you have 4 CSV files, one for each algorithm,
